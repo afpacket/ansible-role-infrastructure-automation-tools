@@ -1,0 +1,86 @@
+# RedHat Family
+- block:
+    # kops
+    - block:
+        - name: kops - copy google-cloud-sdk.repo
+          copy:
+            src: google-cloud-sdk.repo
+            dest: /etc/yum.repos.d/google-cloud-sdk.repo
+            owner: root
+            group: root
+            mode: 0644
+            seuser: system_u
+            serole: object_r
+            setype: system_conf_t
+            selevel: s0
+        
+        - name: kops - dependencies
+          dnf:
+            name: "{{ item }}"
+            state: present
+          with_items:
+            - awscli
+            - kubectl
+
+        - name: kops - download sha1
+          get_url:
+            url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64-sha1"
+            dest: /tmp/kops-linux-amd64-sha1
+            force: yes
+        
+        - name: kops - inspect sha1
+          set_fact:
+            kops_sha1: "{{ lookup('file', '/tmp/kops-linux-amd64-sha1') }}"
+        
+        - name: kops - download
+          get_url:
+            url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
+            dest: /usr/local/bin/kops
+            force: yes
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+            checksum: "sha1:{{ kops_sha1 }}"
+      tags:
+        - kops
+
+    # Terraform
+    - block:
+        - name: terraform - download
+          get_url:
+            url: https://releases.hashicorp.com/terraform/{{ tf_version }}/terraform_{{ tf_version }}_linux_amd64.zip
+            dest: /usr/local/src/terraform_{{ tf_version }}_linux_amd64.zip
+            owner: root
+            group: root
+            mode: 0744
+            seuser: system_u
+            serole: object_r
+            setype: usr_t
+            selevel: s0
+            checksum: "{{ tf_version_checksum }}"
+    
+        - name: terraform - unarchive
+          unarchive:
+            src: /usr/local/src/terraform_{{ tf_version }}_linux_amd64.zip
+            dest: /usr/local/bin
+            remote_src: True
+    
+        - name: terraform - set permissions
+          file:
+            path: /usr/local/bin/terraform
+            state: file
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+      tags:
+        - terraform
+
+  when: ansible_os_family == "RedHat"
