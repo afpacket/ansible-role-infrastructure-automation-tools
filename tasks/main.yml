@@ -83,4 +83,39 @@
       tags:
         - terraform
 
+    # Vault
+    - block:
+        - name: vault - download
+          get_url:
+            url: https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip
+            dest: /usr/local/src/vault_{{ vault_version }}_linux_amd64.zip
+            owner: root
+            group: root
+            mode: 0744
+            seuser: system_u
+            serole: object_r
+            setype: usr_t
+            selevel: s0
+            checksum: "{{ vault_version_checksum }}"
+
+        - name: vault - unarchive
+          unarchive:
+            src: /usr/local/src/vault_{{ vault_version }}_linux_amd64.zip
+            dest: /usr/local/bin
+            remote_src: True
+
+        - name: vault - set permissions
+          file:
+            path: /usr/local/bin/vault
+            state: file
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+      tags:
+        - vault
+
   when: ansible_os_family == "RedHat"
