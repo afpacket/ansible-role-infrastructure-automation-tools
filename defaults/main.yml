@@ -1,7 +1,7 @@
-kops_version: "1.8.1"
+kops_version: "1.9.0"
 
 tf_version: "0.11.7"
 tf_version_checksum: "sha256:6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418"
 
-vault_version: "0.9.6"
-vault_version_checksum: "sha256:3f1f346ff7aaf367fed6a3e83e5a07fdc032f22860585e36c3674f9ead08dbaf"
+vault_version: "0.10.0"
+vault_version_checksum: "sha256:a6b4b6db132f3bbe6fbb77f76228ffa45bd55a5a1ab83ff043c2c665c3f5a744"
