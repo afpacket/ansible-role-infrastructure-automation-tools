@@ -1,5 +1,53 @@
 # RedHat Family
 - block:
+    # helm
+    - block:
+        - set_fact:
+            helm_checksum: "{{ lookup('url', 'https://kubernetes-helm.storage.googleapis.com/helm-v' +item +'-linux-amd64.tar.gz.sha256', split_lines=False) | trim }}"
+          with_items:
+            - "{{ helm_version }}"
+
+        - name: helm - download
+          get_url:
+            url: "https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+            dest: "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+            owner: root
+            group: root
+            mode: 0744
+            seuser: system_u
+            serole: object_r
+            setype: usr_t
+            selevel: s0
+            checksum: "sha256:{{ helm_checksum }}"
+
+        - name: helm - unarchive
+          unarchive:
+            src: "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+            dest: /usr/local/src
+            remote_src: True
+
+        - name: helm - copy binary
+          copy:
+            src: /usr/local/src/linux-amd64/helm
+            dest: /usr/local/bin/helm
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+
+        - name: helm - cleanup
+          file:
+            path: "{{ item }}"
+            state: absent
+          with_items:
+            - "/usr/local/src/linux-amd64/"
+            - "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+      tags:
+        - helm
+
     # kops
     - block:
         - name: kops - copy google-cloud-sdk.repo
