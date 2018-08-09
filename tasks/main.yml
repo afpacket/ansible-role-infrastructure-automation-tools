@@ -48,6 +48,19 @@
       tags:
         - helm
 
+    # heptio-authenticator-aws
+    - name: package - heptio-authenticator-aws
+      get_url:
+        url: "https://github.com/heptio/authenticator/releases/download/v{{ heptio_auth_aws_version }}/heptio-authenticator-aws_{{ heptio_auth_aws_version }}_linux_amd64"
+        dest: "/usr/local/bin/heptio-authenticator-aws"
+        owner: "{{ ansible_env.USER }}"
+        group: admin
+        mode: 0755
+        checksum: "sha256:{{ heptio_auth_aws_checksum }}"
+      tags:
+       - heptio
+       - heptio-authenticator-aws
+
     # kops
     - block:
         - name: kops - copy google-cloud-sdk.repo
@@ -109,7 +122,7 @@
             serole: object_r
             setype: usr_t
             selevel: s0
-            checksum: "{{ tf_version_checksum }}"
+            checksum: "sha256:{{ tf_version_checksum }}"
     
         - name: terraform - unarchive
           unarchive:
@@ -144,7 +157,7 @@
             serole: object_r
             setype: usr_t
             selevel: s0
-            checksum: "{{ vault_version_checksum }}"
+            checksum: "sha256:{{ vault_version_checksum }}"
 
         - name: vault - unarchive
           unarchive:
