@@ -53,8 +53,8 @@
       get_url:
         url: "https://github.com/heptio/authenticator/releases/download/v{{ heptio_auth_aws_version }}/heptio-authenticator-aws_{{ heptio_auth_aws_version }}_linux_amd64"
         dest: "/usr/local/bin/heptio-authenticator-aws"
-        owner: "{{ ansible_env.USER }}"
-        group: admin
+        owner: root
+        group: root
         mode: 0755
         seuser: system_u
         serole: object_r
