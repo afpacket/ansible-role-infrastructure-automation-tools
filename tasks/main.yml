@@ -56,6 +56,10 @@
         owner: "{{ ansible_env.USER }}"
         group: admin
         mode: 0755
+        seuser: system_u
+        serole: object_r
+        setype: bin_t
+        selevel: s0
         checksum: "sha256:{{ heptio_auth_aws_checksum }}"
       tags:
        - heptio
