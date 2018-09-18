@@ -110,6 +110,50 @@
       tags:
         - kops
 
+    # Packer
+    - block:
+        - name: packer - download
+          get_url:
+            url: https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip
+            dest: /usr/local/src/packer_{{ packer_version }}_linux_amd64.zip
+            owner: root
+            group: root
+            mode: 0744
+            seuser: system_u
+            serole: object_r
+            setype: usr_t
+            selevel: s0
+            checksum: "sha256:{{ packer_version_checksum }}"
+
+        - name: packer - unarchive
+          unarchive:
+            src: /usr/local/src/packer_{{ packer_version }}_linux_amd64.zip
+            dest: /usr/local/bin
+            remote_src: True
+
+        - name: packer - set permissions
+          file:
+            path: /usr/local/bin/packer
+            state: file
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+
+        - name: packer - cleanup
+          file:
+            path: "{{ item }}"
+            state: absent
+          with_items:
+            - "/usr/local/src/packer_{{ packer_version }}_linux_amd64.zip"
+
+      tags:
+        - packer
+
+
     # Terraform
     - block:
         - name: terraform - download
