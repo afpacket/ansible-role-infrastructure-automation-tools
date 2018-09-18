@@ -5,8 +5,8 @@ heptio_auth_aws_checksum: "4b8ecce88f4749338e361baf1fba9f8970efed0ac3f58cc40b497
 
 kops_version: "1.9.2"
 
-tf_version: "0.11.7"
-tf_version_checksum: "6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418"
+tf_version: "0.11.8"
+tf_version_checksum: "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7"
 
-vault_version: "0.10.4"
-vault_version_checksum: "b3c8a62e8f2f1b2d9d7ddca3d8bda620ab0091bb038da0d013c26f7b6b18f13a"
+vault_version: "0.11.1"
+vault_version_checksum: "eb8d2461d0ca249c1f91005f878795998bdeafccfde0b9bae82343541ce65996"
