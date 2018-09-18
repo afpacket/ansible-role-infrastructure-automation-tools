@@ -142,6 +142,14 @@
             serole: object_r
             setype: bin_t
             selevel: s0
+
+        - name: terraform - cleanup
+          file:
+            path: "{{ item }}"
+            state: absent
+          with_items:
+            - "/usr/local/src/terraform_{{ tf_version }}_linux_amd64.zip"
+
       tags:
         - terraform
 
@@ -177,6 +185,14 @@
             serole: object_r
             setype: bin_t
             selevel: s0
+
+        - name: vault - cleanup
+          file:
+            path: "{{ item }}"
+            state: absent
+          with_items:
+            - "/usr/local/src/vault_{{ vault_version }}_linux_amd64.zip"
+
       tags:
         - vault
 
