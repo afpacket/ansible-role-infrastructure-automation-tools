@@ -87,15 +87,12 @@
             - awscli
             - kubectl
 
-        - name: kops - download sha1
-          get_url:
-            url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64-sha1"
-            dest: /tmp/kops-linux-amd64-sha1
-            force: yes
-        
-        - name: kops - inspect sha1
+        - name: kops - set fact for kops sha1
           set_fact:
-            kops_sha1: "{{ lookup('file', '/tmp/kops-linux-amd64-sha1') }}"
+            kops_checksum: "{{ lookup('url','https://github.com/kubernetes/kops/releases/download/' +item +'/kops-linux-amd64-sha1', split_lines=False) | trim }}"
+          with_items:
+             - "{{ kops_version }}"
+
         
         - name: kops - download
           get_url:
@@ -109,7 +106,7 @@
             serole: object_r
             setype: bin_t
             selevel: s0
-            checksum: "sha1:{{ kops_sha1 }}"
+            checksum: "sha1:{{ kops_checksum }}"
       tags:
         - kops
 
