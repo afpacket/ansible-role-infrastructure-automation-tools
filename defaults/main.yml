@@ -3,13 +3,13 @@ helm_version: "2.10.0"
 heptio_auth_aws_version: "0.3.0"
 heptio_auth_aws_checksum: "4b8ecce88f4749338e361baf1fba9f8970efed0ac3f58cc40b4979bc0d86eb7b"
 
-kops_version: "1.10.0"
+kops_version: "1.11.0"
 
-packer_version: "1.3.1"
-packer_version_checksum: "254cf648a638f7ebd37dc1b334abe940da30b30ac3465b6e0a9ad59829932fa3"
+packer_version: "1.3.3"
+packer_version_checksum: "2e3ea8f366d676d6572ead7e0c773158dfea0aed9c6a740c669d447bcb48d65f"
 
-tf_version: "0.11.8"
-tf_version_checksum: "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7"
+tf_version: "0.11.11"
+tf_version_checksum: "94504f4a67bad612b5c8e3a4b7ce6ca2772b3c1559630dfd71e9c519e3d6149c"
 
-vault_version: "0.11.1"
-vault_version_checksum: "eb8d2461d0ca249c1f91005f878795998bdeafccfde0b9bae82343541ce65996"
+vault_version: "1.0.1"
+vault_version_checksum: "1ea02627d0157dc844012995123f1cde86a02cb3b45030a9526057d12ee8d924"
