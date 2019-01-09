@@ -1,5 +1,13 @@
 # RedHat Family
 - block:
+    - name: aws packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - awscli
+        - python3-boto3
+
     # helm
     - block:
         - set_fact:
@@ -80,11 +88,10 @@
             selevel: s0
         
         - name: kops - dependencies
-          dnf:
+          package:
             name: "{{ item }}"
             state: present
           with_items:
-            - awscli
             - kubectl
 
         - name: kops - set fact for kops sha1
