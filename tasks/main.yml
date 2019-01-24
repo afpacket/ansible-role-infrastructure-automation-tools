@@ -160,6 +160,23 @@
       tags:
         - packer
 
+    # Serverless
+    - block:
+        - name: serverless - dependencies
+          package:
+            name: "{{ item }}"
+            state: present
+          with_items:
+            - npm
+
+        - name: Install serverless node.js package globally
+          npm:
+            name: serverless
+            state: latest
+            global: yes
+
+      tags:
+        - serverless
 
     # Terraform
     - block:
