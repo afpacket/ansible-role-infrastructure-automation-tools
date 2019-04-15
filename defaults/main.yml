@@ -11,5 +11,5 @@ packer_version_checksum: "7505e11ce05103f6c170c6d491efe3faea1fb49544db0278377160
 tf_version: "0.11.13"
 tf_version_checksum: "5925cd4d81e7d8f42a0054df2aafd66e2ab7408dbed2bd748f0022cfe592f8d2"
 
-vault_version: "1.0.1"
-vault_version_checksum: "1ea02627d0157dc844012995123f1cde86a02cb3b45030a9526057d12ee8d924"
+vault_version: "1.1.1"
+vault_version_checksum: "134261417c8129a92992cba75bf7ebce8ee4d6100de18b722cce7507782e272c"
