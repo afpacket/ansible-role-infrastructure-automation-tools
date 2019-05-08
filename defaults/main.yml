@@ -3,7 +3,7 @@ helm_version: "2.10.0"
 heptio_auth_aws_version: "0.3.0"
 heptio_auth_aws_checksum: "4b8ecce88f4749338e361baf1fba9f8970efed0ac3f58cc40b4979bc0d86eb7b"
 
-kops_version: "1.11.0"
+kops_version: "1.11.1"
 
 packer_version: "1.4.0"
 packer_version_checksum: "7505e11ce05103f6c170c6d491efe3faea1fb49544db0278377160ffb72721e4"
