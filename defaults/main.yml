@@ -1,3 +1,4 @@
+aws: True
 helm: True
 heptio: True
 kops: True
