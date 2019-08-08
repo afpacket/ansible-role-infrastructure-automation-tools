@@ -53,8 +53,9 @@
           with_items:
             - "/usr/local/src/linux-amd64/"
             - "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
-      tags:
-        - helm
+
+      when: helm
+      tags: helm
 
     # heptio-authenticator-aws
     - name: package - heptio-authenticator-aws
@@ -69,6 +70,7 @@
         setype: bin_t
         selevel: s0
         checksum: "sha256:{{ heptio_auth_aws_checksum }}"
+      when: heptio
       tags:
        - heptio
        - heptio-authenticator-aws
@@ -99,7 +101,6 @@
             kops_checksum: "{{ lookup('url','https://github.com/kubernetes/kops/releases/download/' +item +'/kops-linux-amd64-sha1', split_lines=False) | trim }}"
           with_items:
              - "{{ kops_version }}"
-
         
         - name: kops - download
           get_url:
@@ -114,8 +115,9 @@
             setype: bin_t
             selevel: s0
             checksum: "sha1:{{ kops_checksum }}"
-      tags:
-        - kops
+
+      when: kops
+      tags: kops
 
     # Packer
     - block:
@@ -157,8 +159,8 @@
           with_items:
             - "/usr/local/src/packer_{{ packer_version }}_linux_amd64.zip"
 
-      tags:
-        - packer
+      when: packer
+      tags: packer
 
     # Serverless
     - block:
@@ -175,8 +177,8 @@
             state: latest
             global: yes
 
-      tags:
-        - serverless
+      when: serverless
+      tags: serverless
 
     # Terraform
     - block:
@@ -218,8 +220,8 @@
           with_items:
             - "/usr/local/src/terraform_{{ tf_version }}_linux_amd64.zip"
 
-      tags:
-        - terraform
+      when: terraform
+      tags: terraform
 
     # Vault
     - block:
@@ -261,7 +263,7 @@
           with_items:
             - "/usr/local/src/vault_{{ vault_version }}_linux_amd64.zip"
 
-      tags:
-        - vault
+      when: vault
+      tags: vault
 
   when: ansible_os_family == "RedHat"

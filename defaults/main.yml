@@ -1,3 +1,11 @@
+helm: True
+heptio: True
+kops: True
+packer: True
+serverless: True
+terraform: True
+vault: True
+
 helm_version: "2.10.0"
 
 heptio_auth_aws_version: "0.3.0"
