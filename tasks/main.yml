@@ -74,8 +74,8 @@
         checksum: "sha256:{{ heptio_auth_aws_checksum }}"
       when: heptio
       tags:
-       - heptio
-       - heptio-authenticator-aws
+        - heptio
+        - heptio-authenticator-aws
 
     # kops
     - block:
@@ -90,7 +90,7 @@
             serole: object_r
             setype: system_conf_t
             selevel: s0
-        
+
         - name: kops - dependencies
           package:
             name: "{{ item }}"
@@ -102,8 +102,8 @@
           set_fact:
             kops_checksum: "{{ lookup('url','https://github.com/kubernetes/kops/releases/download/' +item +'/kops-linux-amd64-sha1', split_lines=False) | trim }}"
           with_items:
-             - "{{ kops_version }}"
-        
+            - "{{ kops_version }}"
+
         - name: kops - download
           get_url:
             url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
@@ -196,13 +196,13 @@
             setype: usr_t
             selevel: s0
             checksum: "sha256:{{ tf_version_checksum }}"
-    
+
         - name: terraform - unarchive
           unarchive:
             src: /usr/local/src/terraform_{{ tf_version }}_linux_amd64.zip
             dest: /usr/local/bin
             remote_src: True
-    
+
         - name: terraform - set permissions
           file:
             path: /usr/local/bin/terraform
