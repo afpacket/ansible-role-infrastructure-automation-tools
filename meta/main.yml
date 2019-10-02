@@ -1,5 +1,15 @@
 galaxy_info:
-  role_name: devops-tools
+  role_name: devops_tools
   author: afpacket
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Fedora
+      versions:
+        - all
 
 dependencies: []
