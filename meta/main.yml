@@ -12,4 +12,17 @@ galaxy_info:
       versions:
         - all
 
+  galaxy_tags:
+    - system
+    - aws
+    - cloud
+    - hashicorp
+    - helm
+    - kops
+    - kubectl
+    - packer
+    - serverless
+    - terraform
+    - vault
+
 dependencies: []
