@@ -57,13 +57,15 @@
             - "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
 
       when: helm
-      tags: helm
+      tags: 
+        - helm
+        - kubernetes
 
-    # heptio-authenticator-aws
-    - name: package - heptio-authenticator-aws
+    #aws-iam-authenticator (formerly heptio-authenticator-aws)
+    - name: package - aws-iam-authenticator 
       get_url:
-        url: "https://github.com/heptio/authenticator/releases/download/v{{ heptio_auth_aws_version }}/heptio-authenticator-aws_{{ heptio_auth_aws_version }}_linux_amd64"
-        dest: "/usr/local/bin/heptio-authenticator-aws"
+        url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v{{ aws_iam_auth_version }}/aws-iam-authenticator_{{ aws_iam_auth_version }}_linux_amd64"
+        dest: "/usr/local/bin/aws-iam-authenticator"
         owner: root
         group: root
         mode: 0755
@@ -71,11 +73,13 @@
         serole: object_r
         setype: bin_t
         selevel: s0
-        checksum: "sha256:{{ heptio_auth_aws_checksum }}"
-      when: heptio
+        checksum: "sha256:{{ aws_iam_auth_checksum }}"
+      when: aws
       tags:
-        - heptio
-        - heptio-authenticator-aws
+        - aws
+        - aws-iam-authenticator
+        - eks
+        - kubernetes 
 
     # kops
     - block:
@@ -119,7 +123,9 @@
             checksum: "sha1:{{ kops_checksum }}"
 
       when: kops
-      tags: kops
+      tags: 
+        - kops
+        - kubernetes
 
     # Packer
     - block:
