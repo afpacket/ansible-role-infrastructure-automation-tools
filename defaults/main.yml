@@ -14,11 +14,11 @@ heptio_auth_aws_checksum: "4b8ecce88f4749338e361baf1fba9f8970efed0ac3f58cc40b497
 
 kops_version: "1.12.3"
 
-packer_version: "1.4.2"
-packer_version_checksum: "2fcbd1662ac76dc4dec381bdc7b5e6316d5b9d48e0774a32fe6ef9ec19f47213"
+packer_version: "1.4.4"
+packer_version_checksum: "b4dc37877a0fd00fc72ebda98977c2133be9ba6b26bcdd13b1b14a369e508948"
 
-tf_version: "0.12.6"
-tf_version_checksum: "6544eb55b3e916affeea0a46fe785329c36de1ba1bdb51ca5239d3567101876f"
+tf_version: "0.12.9"
+tf_version_checksum: "69712c6216cc09b7eca514b9fb137d4b1fead76559c66f338b4185e1c347ace5"
 
-vault_version: "1.2.1"
-vault_version_checksum: "df14077600df745adf2450f9ea489cf6935352919b27b0367361379460e3b43e"
+vault_version: "1.2.3"
+vault_version_checksum: "fe15676404aff35cb45f7c957f90491921b9269d79a8f933c5a36e26a431bfc4"
