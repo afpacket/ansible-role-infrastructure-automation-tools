@@ -16,8 +16,8 @@ kops_version: "1.12.3"
 packer_version: "1.4.4"
 packer_version_checksum: "b4dc37877a0fd00fc72ebda98977c2133be9ba6b26bcdd13b1b14a369e508948"
 
-tf_version: "0.12.9"
-tf_version_checksum: "69712c6216cc09b7eca514b9fb137d4b1fead76559c66f338b4185e1c347ace5"
+tf_version: "0.12.13"
+tf_version_checksum: "63f765a3f83987b67b046a9c31acff1ec9ee618990d0eab4db34eca6c0d861ec"
 
 vault_version: "1.2.3"
 vault_version_checksum: "fe15676404aff35cb45f7c957f90491921b9269d79a8f933c5a36e26a431bfc4"
