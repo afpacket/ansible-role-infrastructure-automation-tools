@@ -13,11 +13,11 @@ helm_version: "2.14.3"
 
 kops_version: "1.12.3"
 
-packer_version: "1.4.4"
-packer_version_checksum: "b4dc37877a0fd00fc72ebda98977c2133be9ba6b26bcdd13b1b14a369e508948"
+packer_version: "1.5.1"
+packer_version_checksum: "3305ede8886bc3fd83ec0640fb87418cc2a702b2cb1567b48c8cb9315e80047d"
 
-tf_version: "0.12.18"
-tf_version_checksum: "e7ebe3ca988768bffe0c239d107645bd53515354cff6cbe5651718195a151700"
+tf_version: "0.12.19"
+tf_version_checksum: "a549486112f5350075fb540cfd873deb970a9baf8a028a86ee7b4472fc91e167"
 
-vault_version: "1.2.3"
-vault_version_checksum: "fe15676404aff35cb45f7c957f90491921b9269d79a8f933c5a36e26a431bfc4"
+vault_version: "1.3.1"
+vault_version_checksum: "b49de8fd508eb9c2c222fa0f38e23546fb28991af2e8bfdb9bbe381a380f9baa"
