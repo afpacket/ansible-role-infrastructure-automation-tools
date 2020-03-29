@@ -13,8 +13,8 @@ helm_version: "2.14.3"
 
 kops_version: "1.12.3"
 
-packer_version: "1.5.1"
-packer_version_checksum: "3305ede8886bc3fd83ec0640fb87418cc2a702b2cb1567b48c8cb9315e80047d"
+packer_version: "1.5.5"
+packer_version_checksum: "07f28a1a033f4bcd378a109ec1df6742ac604e7b122d0316d2cddb3c2f6c24d1"
 
 tf_version: "0.12.24"
 tf_version_checksum: "602d2529aafdaa0f605c06adb7c72cfb585d8aa19b3f4d8d189b42589e27bf11"
