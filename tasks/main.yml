@@ -80,6 +80,31 @@
         - eks
         - kubernetes 
 
+    # kubectl
+    - block:
+        - name: kubectl - copy google-cloud-sdk.repo
+          copy:
+            src: google-cloud-sdk.repo
+            dest: /etc/yum.repos.d/google-cloud-sdk.repo
+            owner: root
+            group: root
+            mode: 0644
+            seuser: system_u
+            serole: object_r
+            setype: system_conf_t
+            selevel: s0
+
+        - name: kubectl - install
+          package:
+            name: kubectl
+            state: present
+
+      when: kubectl or kops
+      tags:
+        - kubectl
+        - kops
+        - kubernetes
+
     # kops
     - block:
         - name: kops - copy google-cloud-sdk.repo

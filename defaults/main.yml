@@ -1,6 +1,7 @@
 aws: True
 helm: True
 kops: True
+kubectl: True
 packer: True
 serverless: True
 terraform: True
