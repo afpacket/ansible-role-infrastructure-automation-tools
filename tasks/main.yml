@@ -6,7 +6,6 @@
         state: present
       with_items:
         - awscli
-        - python3-boto3
       when: aws
       tags: aws
 
