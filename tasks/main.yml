@@ -1,14 +1,5 @@
 # RedHat Family
 - block:
-    - name: aws packages
-      package:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - awscli
-      when: aws
-      tags: aws
-
     # helm
     - block:
         - set_fact:
