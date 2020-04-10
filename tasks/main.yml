@@ -3,13 +3,13 @@
     # helm
     - block:
         - set_fact:
-            helm_checksum: "{{ lookup('url', 'https://kubernetes-helm.storage.googleapis.com/helm-v' +item +'-linux-amd64.tar.gz.sha256', split_lines=False) | trim }}"
+            helm_checksum: "{{ lookup('url', 'https://get.helm.sh/helm-v' +item +'-linux-amd64.tar.gz.sha256', split_lines=False) | trim }}"
           with_items:
             - "{{ helm_version }}"
 
         - name: helm - download
           get_url:
-            url: "https://storage.googleapis.com/kubernetes-helm/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+            url: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
             dest: "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
             owner: root
             group: root
