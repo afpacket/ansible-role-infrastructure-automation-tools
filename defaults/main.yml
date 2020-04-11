@@ -12,7 +12,7 @@ aws_iam_auth_checksum: "4ccb4788d60ed76e3e6a161b56e1e7d91da1fcd82c98f935ca74c0c2
 
 helm_version: "3.1.2"
 
-kops_version: "1.12.3"
+kops_version: "1.16.0"
 
 packer_version: "1.5.5"
 packer_version_checksum: "07f28a1a033f4bcd378a109ec1df6742ac604e7b122d0316d2cddb3c2f6c24d1"
