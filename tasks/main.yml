@@ -90,6 +90,26 @@
           package:
             name: kubectl
             state: present
+            
+        - name: kubectl - bash autocompletion - ensure bash-completion is installed
+          package:
+            name: "bash-completion"
+            state: present
+            
+        - name: kubectl - bash autocompletion - touch /etc/bash_completion.d/kubectl 
+          file:
+            path: /etc/bash_completion.d/kubectl
+            state: touch
+            owner: root
+            group: root
+            mode: 0644
+            seuser: system_u
+            serole: object_r
+            setype: etc_t
+            selevel: s0
+        
+        - name: kubectl - generage bash autocompletion
+          shell: 'kubectl completion bash > /etc/bash_completion.d/kubectl'
 
       when: kubectl or kops
       tags:
@@ -99,25 +119,6 @@
 
     # kops
     - block:
-        - name: kops - copy google-cloud-sdk.repo
-          copy:
-            src: google-cloud-sdk.repo
-            dest: /etc/yum.repos.d/google-cloud-sdk.repo
-            owner: root
-            group: root
-            mode: 0644
-            seuser: system_u
-            serole: object_r
-            setype: system_conf_t
-            selevel: s0
-
-        - name: kops - dependencies
-          package:
-            name: "{{ item }}"
-            state: present
-          with_items:
-            - kubectl
-
         - name: kops - set fact for kops sha1
           set_fact:
             kops_checksum: "{{ lookup('url','https://github.com/kubernetes/kops/releases/download/' +item +'/kops-linux-amd64-sha1', split_lines=False) | trim }}"
