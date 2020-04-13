@@ -163,13 +163,13 @@
     - block:
         - name: kops - set fact for kops sha1
           set_fact:
-            kops_checksum: "{{ lookup('url','https://github.com/kubernetes/kops/releases/download/' +item +'/kops-linux-amd64-sha1', split_lines=False) | trim }}"
+            kops_checksum: "{{ lookup('url','https://github.com/kubernetes/kops/releases/download/v' +item +'/kops-linux-amd64-sha1', split_lines=False) | trim }}"
           with_items:
             - "{{ kops_version }}"
 
         - name: kops - download
           get_url:
-            url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
+            url: "https://github.com/kubernetes/kops/releases/download/v{{ kops_version }}/kops-linux-amd64"
             dest: /usr/local/bin/kops
             force: yes
             owner: root
