@@ -48,29 +48,71 @@
             - "/usr/local/src/helm-v{{ helm_version }}-linux-amd64.tar.gz"
 
       when: helm
-      tags: 
+      tags:
         - helm
         - kubernetes
 
-    #aws-iam-authenticator (formerly heptio-authenticator-aws)
-    - name: package - aws-iam-authenticator 
-      get_url:
-        url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v{{ aws_iam_auth_version }}/aws-iam-authenticator_{{ aws_iam_auth_version }}_linux_amd64"
-        dest: "/usr/local/bin/aws-iam-authenticator"
-        owner: root
-        group: root
-        mode: 0755
-        seuser: system_u
-        serole: object_r
-        setype: bin_t
-        selevel: s0
-        checksum: "sha256:{{ aws_iam_auth_checksum }}"
-      when: aws
+    #eks tools
+    - block:
+        # aws-iam-authenticator (formerly heptio-authenticator-aws)
+        - name: aws-iam-authenticator
+          get_url:
+            url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v{{ aws_iam_auth_version }}/aws-iam-authenticator_{{ aws_iam_auth_version }}_linux_amd64"
+            dest: "/usr/local/bin/aws-iam-authenticator"
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+            checksum: "sha256:{{ aws_iam_auth_checksum }}"
+
+        - name: eksctl - download
+          get_url:
+            url: "https://github.com/weaveworks/eksctl/releases/download/{{ eksctl_version }}/eksctl_Linux_amd64.tar.gz"
+            dest: /usr/local/src/eksctl_Linux_amd64.zip
+            owner: root
+            group: root
+            mode: 0744
+            seuser: system_u
+            serole: object_r
+            setype: usr_t
+            selevel: s0
+            checksum: "sha256:{{ eksctl_version_checksum }}"
+
+        - name: eksctl - unarchive
+          unarchive:
+            src: /usr/local/src/eksctl_Linux_amd64.zip
+            dest: /usr/local/bin
+            remote_src: True
+
+        - name: eksctl - set permissions
+          file:
+            path: /usr/local/bin/eksctl
+            state: file
+            owner: root
+            group: root
+            mode: 0755
+            seuser: system_u
+            serole: object_r
+            setype: bin_t
+            selevel: s0
+
+        - name: eksctl - cleanup
+          file:
+            path: "{{ item }}"
+            state: absent
+          with_items:
+            - "/usr/local/src/eksctl_Linux_amd64.zip"
+
+      when: eks
       tags:
         - aws
-        - aws-iam-authenticator
         - eks
-        - kubernetes 
+        - aws-iam-authenticator
+        - eksctl
+        - kubernetes
 
     # kubectl
     - block:
@@ -90,13 +132,13 @@
           package:
             name: kubectl
             state: present
-            
+
         - name: kubectl - bash autocompletion - ensure bash-completion is installed
           package:
             name: "bash-completion"
             state: present
-            
-        - name: kubectl - bash autocompletion - touch /etc/bash_completion.d/kubectl 
+
+        - name: kubectl - bash autocompletion - touch /etc/bash_completion.d/kubectl
           file:
             path: /etc/bash_completion.d/kubectl
             state: touch
@@ -107,7 +149,7 @@
             serole: object_r
             setype: etc_t
             selevel: s0
-        
+
         - name: kubectl - generage bash autocompletion
           shell: 'kubectl completion bash > /etc/bash_completion.d/kubectl'
 
@@ -140,7 +182,7 @@
             checksum: "sha1:{{ kops_checksum }}"
 
       when: kops
-      tags: 
+      tags:
         - kops
         - kubernetes
 
