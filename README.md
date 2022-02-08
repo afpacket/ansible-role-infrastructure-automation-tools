@@ -1,7 +1,7 @@
-# ansible-role-devops-tools
-Ansible role for installing DevOps tools on Linux machines (currently RedHat family only)
+# ansible-role-infrastructure-automation-tools
+Ansible role for installing infrastructure automation tools on Linux machines (currently RedHat family only)
 
-Sample playbook file (devops-tools.yml):
+Sample playbook file (infra-automation-tools.yml):
 
 ```
 - hosts: localhost
