@@ -1,5 +1,15 @@
 # RedHat Family
 - block:
+    # dependencies
+    - block:
+        - name: package dependencies
+          ansible.builtin.package:
+            name:
+              - "npm"
+            state: present
+          tags: ['cdktf', 'serverless', 'terraform', 'terraformcdk']
+          when: serverless|bool or terraform|bool
+
     # helm
     - block:
         - set_fact:
@@ -231,13 +241,6 @@
 
     # Serverless
     - block:
-        - name: serverless - dependencies
-          package:
-            name: "{{ item }}"
-            state: present
-          with_items:
-            - npm
-
         - name: Install serverless node.js package globally
           npm:
             name: serverless
@@ -286,6 +289,13 @@
             state: absent
           with_items:
             - "/usr/local/src/terraform_{{ tf_version }}_linux_amd64.zip"
+
+        - name: terraform cdk - install cdktf-cli node.js package globally
+          community.general.npm:
+            name: cdktf-cli
+            state: latest
+            global: yes
+          tags: ['cdktf', 'terraformcdk']
 
       when: terraform
       tags: terraform
